@@ -1,6 +1,12 @@
 ruby '2.4.0'
 source 'https://rubygems.org'
 
+
+#Jquery for bootstrap
+gem 'jquery-rails'
+# Bootstrap for the good looks
+gem 'bootstrap', '~> 4.0.0.beta'
+
 # Devise for authentication
 gem 'devise'
 

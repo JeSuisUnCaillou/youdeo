@@ -27,7 +27,6 @@ class AuthenticationTest < ActionDispatch::IntegrationTest
   end
   
   test "can sign in" do
-    user_count = User.count
     post "/users/sign_in", params: { 
         user:{
             email: "grotest@testmail.com",
@@ -35,7 +34,6 @@ class AuthenticationTest < ActionDispatch::IntegrationTest
         }
     }
     assert_response :success
-    assert_equal user_count, User.count
   end
   
 end
