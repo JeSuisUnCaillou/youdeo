@@ -4,12 +4,14 @@ La plateforme de partage de contenus vidéos.
 
 ## Technical stuff
 
-* Ruby version+
+### Ruby version+
 ruby 2.4.0p0 (2016-12-24 revision 57164)
 
-* System dependencies
+### Important Gems
+* [Devise](https://github.com/plataformatec/devise) and [omniauth-google-oauth2](https://github.com/zquestz/omniauth-google-oauth2) gems for the login
 
-* Configuration
+
+### Configuration
 
 * Database creation
 

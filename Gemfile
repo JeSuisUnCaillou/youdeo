@@ -1,6 +1,10 @@
 ruby '2.4.0'
 source 'https://rubygems.org'
 
+# Devise for authentication
+gem 'devise'
+
+#Its a workaround for a bug in Bundler which can cause sources from github to be loaded via HTTP and not HTTPS - which makes it vulnerable to man in the middle attacks.
 git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
   "https://github.com/#{repo_name}.git"
@@ -52,6 +56,7 @@ group :development do
 end
 
 group :production do
+  # Use postgresql as the database for Active Record
   gem 'pg'
 end
 
