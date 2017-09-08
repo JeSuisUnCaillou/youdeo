@@ -7,6 +7,8 @@ gem 'jquery-rails'
 # Bootstrap for the good looks
 gem 'bootstrap', '~> 4.0.0.beta'
 
+# Google's OAuth2 strategy for devise
+gem 'omniauth-google-oauth2'
 # Devise for authentication
 gem 'devise'
 
