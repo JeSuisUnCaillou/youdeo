@@ -39,11 +39,8 @@ class UserTest < ActiveSupport::TestCase
   
   
   test "create a user from omniauth params" do
-    access_token = OpenStruct.new(
-      uid: "myUid",
-      info: OpenStruct.new(email: "myname@test.com", name: "My Name", image: "my_image_url"),
-      credentials: OpenStruct.new(token: "myToken", refresh_token: "myRefreshToken")
-    )
+    access_token = fake_google_oauth_response
+    
     user = User.from_omniauth(access_token)
     assert_not_nil user
     assert_equal "myUid", user.uid
