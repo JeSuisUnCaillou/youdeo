@@ -1,11 +1,11 @@
-# README
+# YOUDEO
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+La plateforme de partage de contenus vidéos.
 
-Things you may want to cover:
+## Technical stuff
 
-* Ruby version
+* Ruby version+
+ruby 2.4.0p0 (2016-12-24 revision 57164)
 
 * System dependencies
 
