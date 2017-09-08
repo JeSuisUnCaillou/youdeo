@@ -24,19 +24,33 @@ class UserTest < ActiveSupport::TestCase
     User.create(email: "myname@test.com", password: "123bonjour", password_confirmation: "123bonjourTOP")
     assert_raise StandardError
   end
+   
+  test "can't create 2 users with same email" do
+    User.create(email: "myname@test.com", password: "123bonjour", password_confirmation: "123bonjour")
+    User.create(email: "myname@test.com", password: "123bonjourPareil", password_confirmation: "123bonjourPareil")
+    assert_raise StandardError
+  end
   
-  # test "ca, create a user with just uid and password" do
-  #   user = User.create(uid: "myUid", password: "123bonjour", password_confirmation: "123bonjour")
-
-  # end
-  
+  test "can't create 2 users with same uid" do
+    user = User.create(email: "myname@test.com", uid: "myUid", password: "123bonjour", password_confirmation: "123bonjour")
+    user = User.create(email: "myOthername@test.com", uid: "myUid", password: "123bonjourPareil", password_confirmation: "123bonjourPareil")
+    assert_raise StandardError
+  end
   
   
   test "create a user from omniauth params" do
     access_token = OpenStruct.new(
-      info: OpenStruct.new(email: "myname@test.com", name: "My Name")
+      uid: "myUid",
+      info: OpenStruct.new(email: "myname@test.com", name: "My Name", image: "my_image_url"),
+      credentials: OpenStruct.new(token: "myToken", refresh_token: "myRefreshToken")
     )
     user = User.from_omniauth(access_token)
     assert_not_nil user
+    assert_equal "myUid", user.uid
+    assert_equal "My Name", user.name
+    assert_equal "my_image_url", user.google_image_url
+    assert_equal "myToken", user.google_token
+    assert_equal "myRefreshToken", user.google_refresh_token
   end
+  
 end
