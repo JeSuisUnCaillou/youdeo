@@ -35,6 +35,8 @@ Run `rake db:migrate` to create the database
 
 Run `rake test` to run the test suite
 
+* [Guide for omniauth integration testing](https://github.com/omniauth/omniauth/wiki/Integration-Testing)
+
 ### Services (job queues, cache servers, search engines, etc.)
 None
 

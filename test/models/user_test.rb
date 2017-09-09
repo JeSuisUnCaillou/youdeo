@@ -38,7 +38,7 @@ class UserTest < ActiveSupport::TestCase
   end
   
   
-  test "create a user from omniauth params" do
+  test "create a user from omniauth params and getting a user from omnioauth params" do
     access_token = fake_google_oauth_response
     
     user = User.from_omniauth(access_token)
@@ -48,6 +48,11 @@ class UserTest < ActiveSupport::TestCase
     assert_equal "my_image_url", user.google_image_url
     assert_equal "myToken", user.google_token
     assert_equal "myRefreshToken", user.google_refresh_token
+    
+    user2 = User.from_omniauth(access_token)
+    assert_equal user, user2
   end
+  
+  
   
 end
