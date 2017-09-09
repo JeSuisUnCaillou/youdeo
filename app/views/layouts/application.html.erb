@@ -13,12 +13,14 @@
     <%= csrf_meta_tags %>
   </head>
 
-  <body class="container-fluid">
+  <body>
     <%= render partial: "layouts/navbar" %>
+    <div class="container-fluid">
+      <% if notice %><p class="notice"><%= notice %></p><% end %>
+      <% if alert %><p class="alert"><%= alert %></p><% end %>
+      
+      <%= yield %>  
+    </div>
     
-    <% if notice %><p class="notice"><%= notice %></p><% end %>
-    <% if alert %><p class="alert"><%= alert %></p><% end %>
-    
-    <%= yield %>
   </body>
 </html>
