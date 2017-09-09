@@ -10,9 +10,9 @@ class ActiveSupport::TestCase
   def fake_google_oauth_response(**params)
     uid = params[:uid] || "myUid"
     email = params[:email] || "myname@test.com"
-    name = params[:name] || "My Name"
     image = params[:image] || "my_image_url"
     token = params[:token] || "myToken"
+    name = params[:name] || "My Name"
     refresh_token = params[:refresh_token] || "myRefreshToken"
     
     OpenStruct.new(

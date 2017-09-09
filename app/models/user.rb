@@ -67,8 +67,8 @@ class User < ApplicationRecord
             google_image_url: info['image']
         )
         #only updates these fields if they aren't empty, we don't want to override a previously given mail or refresh_token
-        user.update(google_refresh_token: credentials['refresh_token']) if credentials["refresh_token"]
-        user.update(email: info['email']) if info['email']
+        user.update(google_refresh_token: credentials['refresh_token']) if credentials["refresh_token"].present?
+        user.update(email: info['email']) if info['email'].present?
     else
         #Create fake email from uid if missing
         email = info['email'] || "#{uid}@fakemail.com"

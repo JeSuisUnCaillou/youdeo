@@ -53,6 +53,27 @@ class UserTest < ActiveSupport::TestCase
     assert_equal user, user2
   end
   
+  test "if user uid exists, getting user from omniauth updates" do
+    user = User.from_omniauth(fake_google_oauth_response)
+    User.from_omniauth(fake_google_oauth_response(name: "new name"))
+    
+    assert_not_equal user.name, User.find_by(uid: user.uid).name
+  end
   
+  test "if user uid exists, getting user from omniauth with empty name and refresh_token doesn't update the fields" do
+    acces_token = fake_google_oauth_response
+    
+    acces_token_with_empty = fake_google_oauth_response
+    acces_token_with_empty.info.email = nil
+    acces_token_with_empty.credentials.refresh_token = nil
+    
+    user = User.from_omniauth(acces_token)
+    User.from_omniauth(acces_token_with_empty)
+    
+    user_in_db = User.find_by(uid: user.uid)
+    
+    assert_equal user.name, user_in_db.name
+    assert_equal user.google_refresh_token, user_in_db.google_refresh_token
+  end
   
 end
