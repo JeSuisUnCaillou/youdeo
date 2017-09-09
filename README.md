@@ -10,20 +10,17 @@ ruby 2.4.0p0 (2016-12-24 revision 57164)
 ### Important Gems
 * [Bootstrap](https://github.com/twbs/bootstrap-rubygem) for the good looks
 * [Devise](https://github.com/plataformatec/devise) and [omniauth-google-oauth2](https://github.com/zquestz/omniauth-google-oauth2) gems for the login
-
+* This [Youtube API gem](https://github.com/Fullscreen/yt) to poke youtube datas. You might also need [this Stackoverflow post](https://stackoverflow.com/questions/10827920/not-receiving-google-oauth-refresh-token) with the way to get a new refresh token for the google api. Useful when testing.
 
 ### Configuration
-You need three environnement variables for google API to work :
-* GOOGLE_API_KEY
-* GOOGLE_CLIENT_ID
-* GOOGLE_CLIENT_SECRET
+You need three environnement variables for google API to work. Get them from Google in [the Developer Console](https://console.developers.google.com/)
 
-In console, create or add in your `~/.bash_profile` the following lines :
+To keep your environnement variables up, create or add in your `~/.bash_profile` the following lines :
 
 ```
-export GOOGLE_API_KEY=AIzaSyCDbZ3Bz_AtVbgXrSHRRutM2bvXU8OvF8A
-export GOOGLE_CLIENT_ID=134945960714-np8li9doq6r3m2tnjb9hvonl7qs6hi52.apps.googleusercontent.com
-export GOOGLE_CLIENT_SECRET=OrI3Bm5nup1oxfT5Ta0koOoU
+export GOOGLE_API_KEY=...
+export GOOGLE_CLIENT_ID=...
+export GOOGLE_CLIENT_SECRET=...
 ```
 
 
