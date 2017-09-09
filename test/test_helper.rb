@@ -7,11 +7,20 @@ class ActiveSupport::TestCase
 
   # Add more helper methods to be used by all tests here...
   
-  def fake_google_oauth_response
+  def fake_google_oauth_response(**params)
+    uid = params[:uid] || "myUid"
+    email = params[:email] || "myname@test.com"
+    name = params[:name] || "My Name"
+    image = params[:image] || "my_image_url"
+    token = params[:token] || "myToken"
+    refresh_token = params[:refresh_token] || "myRefreshToken"
+    
     OpenStruct.new(
-      uid: "myUid",
-      info: OpenStruct.new(email: "myname@test.com", name: "My Name", image: "my_image_url"),
-      credentials: OpenStruct.new(token: "myToken", refresh_token: "myRefreshToken")
+      uid: uid,
+      info: OpenStruct.new(email: email, name: name, image: image),
+      credentials: OpenStruct.new(token: token, refresh_token: refresh_token)
     )
   end
+  
+  
 end
