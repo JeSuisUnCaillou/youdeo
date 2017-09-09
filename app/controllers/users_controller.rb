@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-    before_action :set_tip, only: [:show]
+    before_action :set_user, only: [:show]
     
     def show
         
@@ -8,6 +8,6 @@ class UsersController < ApplicationController
     private
 
         def set_user
-          @user = User.find(params[:id]) || User.find(params[:user_id])
+            @user = User.find(params[:id]) || User.find(params[:user_id])
         end
 end

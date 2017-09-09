@@ -9,7 +9,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.1]
       
       #Google stuff
       t.string :name
-      t.string :uid, null: true, default: ""
+      t.string :uid
       t.string :google_token
       t.string :google_refresh_token
       t.string :google_image_url

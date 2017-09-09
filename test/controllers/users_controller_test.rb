@@ -7,7 +7,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     end
     
     test "profile page should exist and contain user's name in title" do
-        get user_path(@user)
+        get user_path(id: @user.id)
         assert_response :success
         assert_select "h1", @user.name
     end

@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(version: 20170908130413) do
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "name"
-    t.string "uid", default: ""
+    t.string "uid"
     t.string "google_token"
     t.string "google_refresh_token"
     t.string "google_image_url"
