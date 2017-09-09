@@ -76,4 +76,16 @@ class UserTest < ActiveSupport::TestCase
     assert_equal user.google_refresh_token, user_in_db.google_refresh_token
   end
   
+  test "if user email doesn't exist, a fake mail is created" do
+    user_count = User.count
+    
+    acces_token = fake_google_oauth_response
+    acces_token.info.email = nil
+    user = User.from_omniauth(acces_token)
+    
+    assert_equal user_count + 1, User.count
+    assert_not_nil user.email
+    assert_equal "#{user.uid.downcase}@fakemail.com", user.email
+  end
+  
 end
