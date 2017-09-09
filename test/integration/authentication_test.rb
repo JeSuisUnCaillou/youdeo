@@ -17,7 +17,7 @@ class AuthenticationTest < ActionDispatch::IntegrationTest
         }
     }
     assert_response :redirect
-    assert_redirected_to root_path
+    assert_redirected_to user_path(User.last)
     assert_equal user_count + 1, User.count
   end
   
@@ -29,12 +29,12 @@ class AuthenticationTest < ActionDispatch::IntegrationTest
     
     get user_google_oauth2_omniauth_authorize_path
     assert_response :redirect
-    #assert_match(/https:\/\/accounts\.google\.com\/o\/oauth2\/auth/, @response.redirect_url)
+    assert_match(/\/users\/auth\/google_oauth2\/callback/, @response.redirect_url)
 
     @request.env['omniauth.auth'] = fake_google_oauth_response
     get user_google_oauth2_omniauth_callback_path
     assert_response :redirect
-    #assert_redirected_to new_user_session_path
+    assert_redirected_to user_path(User.last)
     assert_equal user_count + 1, User.count
   end
   
