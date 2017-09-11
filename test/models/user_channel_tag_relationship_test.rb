@@ -26,8 +26,8 @@ class UserChannelTagRelationshipTest < ActiveSupport::TestCase
     tag1 = Tag.create(title: "ex1")
     tag2 = Tag.create(title: "ex2")
     channel = Channel.create(uid: "channel1")
-    rel = UserChannelTagRelationship.create(user: user, tag: tag1, channel: channel)
-    rel = UserChannelTagRelationship.create(user: user, tag: tag2, channel: channel)
+    UserChannelTagRelationship.create(user: user, tag: tag1, channel: channel)
+    UserChannelTagRelationship.create(user: user, tag: tag2, channel: channel)
     
     assert_equal 2, user.tags.count
     assert_equal 1, user.channels.count
@@ -40,8 +40,8 @@ class UserChannelTagRelationshipTest < ActiveSupport::TestCase
     tag = Tag.create(title: "ex1")
     channel1 = Channel.create(uid: "channel1")
     channel2 = Channel.create(uid: "channel2")
-    rel = UserChannelTagRelationship.create(user: user, tag: tag, channel: channel1)
-    rel = UserChannelTagRelationship.create(user: user, tag: tag, channel: channel2)
+    UserChannelTagRelationship.create(user: user, tag: tag, channel: channel1)
+    UserChannelTagRelationship.create(user: user, tag: tag, channel: channel2)
     
     assert_equal 1, user.tags.count
     assert_equal 2, user.channels.count
@@ -54,8 +54,8 @@ class UserChannelTagRelationshipTest < ActiveSupport::TestCase
     user2 = User.create(email: "myname2@test.com", password: "123bonjourpareil", password_confirmation: "123bonjourpareil")
     tag = Tag.create(title: "ex1")
     channel = Channel.create(uid: "channel")
-    rel = UserChannelTagRelationship.create(user: user1, tag: tag, channel: channel)
-    rel = UserChannelTagRelationship.create(user: user2, tag: tag, channel: channel)
+    UserChannelTagRelationship.create(user: user1, tag: tag, channel: channel)
+    UserChannelTagRelationship.create(user: user2, tag: tag, channel: channel)
     
     assert_equal 2, tag.users.count
     assert_equal 1, tag.channels.count

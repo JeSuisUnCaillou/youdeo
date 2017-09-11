@@ -15,6 +15,12 @@ class User < ApplicationRecord
     has_many :channels, -> { distinct }, through: :user_channel_tag_relationships
 
 
+    def tags_with_count
+       tags.group('tags.title')
+           .pluck('tags.title, count(user_channel_tag_rels.channel_id) as channel_count')
+           .to_h
+    end
+
     #  EXAMPLE OF RESPONSE FROM GOOGLE OMNIAUTH : (there isn't any email, so I worked around it)
     #  {
     #       "provider" => "google_oauth2",

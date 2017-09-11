@@ -96,4 +96,19 @@ class UserTest < ActiveSupport::TestCase
   end
   
   
+  
+  
+  test "get tags with count" do 
+    user = User.create(email: "myname@test.com", password: "123bonjour", password_confirmation: "123bonjour")
+    tag1 = Tag.create(title: "ex1")
+    tag2 = Tag.create(title: "ex2")
+    channel1 = Channel.create(uid: "channel1")
+    channel2 = Channel.create(uid: "channel2")
+    UserChannelTagRelationship.create(user: user, tag: tag1, channel: channel1)
+    UserChannelTagRelationship.create(user: user, tag: tag2, channel: channel1)
+    UserChannelTagRelationship.create(user: user, tag: tag2, channel: channel2)
+    
+    assert_equal({tag1.title => 1, tag2.title => 2}, user.tags_with_count)
+  end
+  
 end
