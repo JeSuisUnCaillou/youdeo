@@ -1,6 +1,13 @@
 require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
+  test "have all its relationships ok" do
+    user = User.create(email: "myname@test.com", password: "123bonjour", password_confirmation: "123bonjour")
+    assert user.user_channel_tag_relationships
+    assert user.tags
+    assert user.channels
+  end
+  
   
   test "can create a user with just email and password" do
     user_count = User.count

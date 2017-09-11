@@ -8,6 +8,11 @@ class User < ApplicationRecord
          :omniauthable, omniauth_providers: [:google_oauth2]
          
   validates_uniqueness_of :uid, allow_blank: true, allow_nil: true
+  
+  
+  has_many :user_channel_tag_relationships, class_name: 'Youtube::UserChannelTagRelationship'
+  has_many :tags, through: :user_channel_tag_relationships, source: :youtube_tag
+  has_many :channels, through: :user_channel_tag_relationships, source: :youtube_channel
 
 
 #  EXAMPLE OF RESPONSE FROM GOOGLE OMNIAUTH : (there isn't any email, so I worked around it)
