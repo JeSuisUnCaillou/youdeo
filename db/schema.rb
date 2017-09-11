@@ -12,15 +12,29 @@
 
 ActiveRecord::Schema.define(version: 20170911153214) do
 
-  create_table "user_channel_tag_rels", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "youtube_channel_id"
-    t.integer "youtube_tag_id"
+  create_table "channels", force: :cascade do |t|
+    t.string "uid"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["uid"], name: "index_channels_on_uid", unique: true
+  end
+
+  create_table "tags", force: :cascade do |t|
+    t.string "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["title"], name: "index_tags_on_title", unique: true
+  end
+
+  create_table "user_channel_tag_rels", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "channel_id"
+    t.integer "tag_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["channel_id"], name: "index_user_channel_tag_rels_on_channel_id"
+    t.index ["tag_id"], name: "index_user_channel_tag_rels_on_tag_id"
     t.index ["user_id"], name: "index_user_channel_tag_rels_on_user_id"
-    t.index ["youtube_channel_id"], name: "index_user_channel_tag_rels_on_youtube_channel_id"
-    t.index ["youtube_tag_id"], name: "index_user_channel_tag_rels_on_youtube_tag_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -44,20 +58,6 @@ ActiveRecord::Schema.define(version: 20170911153214) do
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["uid"], name: "index_users_on_uid", unique: true
-  end
-
-  create_table "youtube_channels", force: :cascade do |t|
-    t.string "uid"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["uid"], name: "index_youtube_channels_on_uid", unique: true
-  end
-
-  create_table "youtube_tags", force: :cascade do |t|
-    t.string "title"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["title"], name: "index_youtube_tags_on_title", unique: true
   end
 
 end

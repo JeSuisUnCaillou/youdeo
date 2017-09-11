@@ -1,7 +1,7 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-# one:
-#   user: one
-#   youtube_channel: one
-#   youtube_tag: one
+ one:
+   user_id: 0
+   channel_id: 0
+   tag_id: 0
 
