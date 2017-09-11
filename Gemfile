@@ -14,6 +14,9 @@ gem 'omniauth-google-oauth2'
 # Devise for authentication
 gem 'devise'
 
+#awesome print for pretty debugs
+gem 'awesome_print'
+
 #Its a workaround for a bug in Bundler which can cause sources from github to be loaded via HTTP and not HTTPS - which makes it vulnerable to man in the middle attacks.
 git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
@@ -54,7 +57,6 @@ group :development, :test do
   gem 'selenium-webdriver'
   # Use sqlite3 as the database for Active Record
   gem 'sqlite3'
-  gem 'awesome_print'
 end
 
 group :development do
