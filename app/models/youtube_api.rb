@@ -26,6 +26,9 @@ class YoutubeApi
     
     def get_subscribed_channels(arg)
         account = get_account(arg)
+        
+        # vvv TOO SLOW !! vvv
+        
         # map the results to retreive all infos right now, instead of in the views
         # channels = account.subscribed_channels.map{ |channel| OpenStruct.new(
         #     id: channel.id,
@@ -35,6 +38,8 @@ class YoutubeApi
         #     subscriber_count: channel.subscriber_count,
         #     subscriber_count_visible: channel.subscriber_count_visible?
         # )}
+        
+        # vvv FASTER vvv
         
         channels = get_all_subscribed_channels(account)
         
