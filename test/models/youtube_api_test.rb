@@ -28,6 +28,12 @@ class YoutubeApiTest < ActiveSupport::TestCase
     assert_equal "JeSuisUnCaill0u", account.name
   end
   
-  
+  test "get account's channels" do
+    user = User.first 
+    user.google_refresh_token = "1/neJAsmsyiNlDkj6sG7Df2c4afUHNkKdV5IQ9uXFmv6Q"
+    channels = @youtube_api.get_subscribed_channels(user)
+
+    assert 100 < channels.count, "channels count must be over 100 for JeSuisUnCaill0u"
+  end
   
 end

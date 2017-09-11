@@ -56,12 +56,10 @@ class YoutubeApi
         end
         
         def get_subscribed_channels_page(account, page_token)
-            ap "GET PAGE : #{page_token}"
             url = URI.parse "https://www.googleapis.com/youtube/v3/subscriptions?part=snippet%2CcontentDetails&channelId=#{account.channel.id}&maxResults=50&key=#{API_KEY}&pageToken=#{page_token}"
             res = Net::HTTP.get(url)
             json = ActiveSupport::JSON.decode(res)
             channels = json["items"]
-            ap channels.count
             channels = channels + get_subscribed_channels_page(account, json["nextPageToken"]) if json["nextPageToken"].present?
             
             return channels
