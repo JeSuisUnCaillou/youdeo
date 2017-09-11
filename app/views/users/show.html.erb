@@ -1,11 +1,17 @@
 <h1><%= @user.name %></h1>
 
 <% if user_signed_in? && @user == current_user %>
-    <p>(this is you)</p>
+    <p>(this is you) <%= @elapsed_time %>s</p>
     
-    <% for channel in @subscribed_channels do %>
-        <%= render partial: "channel/show", locals: { channel: channel } %>
-    <% end %>
+    <h2>Youtube subscriptions</h2>
+    <div class="row">
+        <% for channel in @subscribed_channels do %>
+            <div class="col-md-3 mb-2">
+                <%= render partial: "youtube/channel", locals: { channel: channel } %>
+            </div>
+        <% end %>    
+    </div>
+    
     
     
 <% end %>

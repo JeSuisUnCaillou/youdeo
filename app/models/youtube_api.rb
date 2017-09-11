@@ -24,6 +24,18 @@ class YoutubeApi
         Yt::Account.new refresh_token: google_token
     end
     
+    def get_subscribed_channels(arg)
+        account = get_account(arg)
+        channels = account.subscribed_channels.map{ |channel| OpenStruct.new(
+            thumbnail_url: channel.thumbnail_url,
+            title: channel.title,
+            video_count: channel.video_count,
+            subscriber_count: channel.subscriber_count,
+            subscriber_count_visible: channel.subscriber_count_visible?
+        )}
+        channels
+    end
+    
     private
         
         def initialize_secret_keys

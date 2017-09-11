@@ -2,11 +2,14 @@ class UsersController < ApplicationController
     before_action :set_user, only: [:show]
     
     def show
+        init_time = DateTime.now
+        
         if(current_user == @user)
             youtube_api = YoutubeApi.new
-            @account = youtube_api.get_account(@user)
-            @subscribed_channels = @account.subscribed_channels
+            @subscribed_channels = youtube_api.get_subscribed_channels(@user)
         end
+        
+        @elapsed_time = ((DateTime.now - init_time) * 24 * 60 * 60).to_i
     end
     
     private
