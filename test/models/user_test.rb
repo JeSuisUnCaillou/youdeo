@@ -95,4 +95,5 @@ class UserTest < ActiveSupport::TestCase
     assert_equal "#{user.uid.downcase}@fakemail.com", user.email
   end
   
+  
 end

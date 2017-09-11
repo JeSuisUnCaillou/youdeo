@@ -34,6 +34,11 @@ class YoutubeApiTest < ActiveSupport::TestCase
     channels = @youtube_api.get_subscribed_channels(user)
 
     assert 100 < channels.count, "channels count must be over 100 for JeSuisUnCaill0u"
+    assert_not_nil channels.first.uid
+    assert_not_nil channels.first.thumbnail_url
+    assert_not_nil channels.first.title
+    assert_not_nil channels.first.video_count
   end
+  
   
 end
