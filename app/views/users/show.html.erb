@@ -1,2 +1,11 @@
 <h1><%= @user.name %></h1>
-<%= "(this is you)" if user_signed_in? && @user.id == current_user.id %>
+
+<% if user_signed_in? && @user == current_user %>
+    <p>(this is you)</p>
+    
+    <% for channel in @subscribed_channels do %>
+        <%= render partial: "channel/show", locals: { channel: channel } %>
+    <% end %>
+    
+    
+<% end %>

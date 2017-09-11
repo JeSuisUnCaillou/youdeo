@@ -11,7 +11,16 @@ class YoutubeApi
        Yt::Video.new id: id
     end
     
-    def get_account(google_token)
+    def get_account(arg)
+        
+        if(arg.is_a?(User))
+            google_token = arg.google_refresh_token
+        elsif(arg.is_a?(String))
+            google_token = arg
+        else
+            raise ArgumentError, "arg must be a User or a google_refresh_token"
+        end
+        
         Yt::Account.new refresh_token: google_token
     end
     
