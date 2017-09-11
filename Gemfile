@@ -1,6 +1,8 @@
 ruby '2.4.0'
 source 'https://rubygems.org'
 
+#Youtube API Gem
+gem 'yt', '~> 0.28.0'
 
 #Jquery for bootstrap
 gem 'jquery-rails'
