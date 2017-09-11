@@ -1,0 +1,9 @@
+<% channels ||= [] %>
+
+<div class="row">
+    <% for channel in channels do %>
+        <div class="col-md-3 p-2">
+            <%= render partial: "youtube/channel", locals: { channel: channel } %>
+        </div>
+    <% end %>    
+</div>

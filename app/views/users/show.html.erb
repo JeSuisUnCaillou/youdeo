@@ -4,13 +4,7 @@
     <p>(this is you) <%= @elapsed_time %>s</p>
     
     <h2>Youtube subscriptions</h2>
-    <div class="row">
-        <% for channel in @subscribed_channels do %>
-            <div class="col-md-3 p-2">
-                <%= render partial: "youtube/channel", locals: { channel: channel } %>
-            </div>
-        <% end %>    
-    </div>
+    <%= render partial: "youtube/channels", locals: { channels: @subscribed_channels} %>
     
     
     
