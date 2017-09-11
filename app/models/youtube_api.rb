@@ -27,6 +27,7 @@ class YoutubeApi
     def get_subscribed_channels(arg)
         account = get_account(arg)
         channels = account.subscribed_channels.map{ |channel| OpenStruct.new(
+            id: channel.id,
             thumbnail_url: channel.thumbnail_url,
             title: channel.title,
             video_count: channel.video_count,
