@@ -15,9 +15,11 @@
                         <strong><%= channel.title.truncate(25) %></strong>
                     <% end %>
                 </div>
-                <div class="col-md-6">
-                    <small><b><%= number_to_human(channel.subscriber_count) if channel.subscriber_count_visible %></b> subscribers</small>
-                </div>
+                <% if channel.subscriber_count_visible %>
+                    <div class="col-md-6">
+                        <small><b><%= number_to_human(channel.subscriber_count)%></b> subscribers</small>
+                    </div>
+                <% end %>
                 <div class="col-md-6">
                     <small><b><%= channel.video_count %></b> videos</small>
                 </div>

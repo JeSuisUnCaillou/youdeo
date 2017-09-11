@@ -26,18 +26,46 @@ class YoutubeApi
     
     def get_subscribed_channels(arg)
         account = get_account(arg)
-        channels = account.subscribed_channels.map{ |channel| OpenStruct.new(
-            id: channel.id,
-            thumbnail_url: channel.thumbnail_url,
-            title: channel.title,
-            video_count: channel.video_count,
-            subscriber_count: channel.subscriber_count,
-            subscriber_count_visible: channel.subscriber_count_visible?
+        # map the results to retreive all infos right now, instead of in the views
+        # channels = account.subscribed_channels.map{ |channel| OpenStruct.new(
+        #     id: channel.id,
+        #     thumbnail_url: channel.thumbnail_url,
+        #     title: channel.title,
+        #     video_count: channel.video_count,
+        #     subscriber_count: channel.subscriber_count,
+        #     subscriber_count_visible: channel.subscriber_count_visible?
+        # )}
+        
+        channels = get_all_subscribed_channels(account)
+        
+        channels.map{ |channel| OpenStruct.new(
+            id: channel["snippet"]["resourceId"]["channelId"],
+            thumbnail_url: channel["snippet"]["thumbnails"]["default"]["url"],
+            title: channel["snippet"]["title"],
+            video_count: channel["contentDetails"]["totalItemCount"],
+            subscriber_count: 0,
+            subscriber_count_visible: false
         )}
-        channels
+        
     end
     
     private
+    
+        def get_all_subscribed_channels(account)
+            get_subscribed_channels_page(account, nil)
+        end
+        
+        def get_subscribed_channels_page(account, page_token)
+            ap "GET PAGE : #{page_token}"
+            url = URI.parse "https://www.googleapis.com/youtube/v3/subscriptions?part=snippet%2CcontentDetails&channelId=#{account.channel.id}&maxResults=50&key=#{API_KEY}&pageToken=#{page_token}"
+            res = Net::HTTP.get(url)
+            json = ActiveSupport::JSON.decode(res)
+            channels = json["items"]
+            ap channels.count
+            channels = channels + get_subscribed_channels_page(account, json["nextPageToken"]) if json["nextPageToken"].present?
+            
+            return channels
+        end
         
         def initialize_secret_keys
             if(API_KEY)
