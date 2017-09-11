@@ -3,23 +3,23 @@
 <div class="card">
     <div class="card-block row">
         
-        <div class="col-md-4">
+        <div class="col-md-4 pr-0">
             <%= link_to "https://www.youtube.com/channel/#{channel.id}" do %>
                 <%= image_tag channel.thumbnail_url, class: "img-fluid rounded" %>    
             <% end %>
         </div>
-        <div class="col-md-8">
+        <div class="col-md-8 pl-0">
             <div class="row">
                 <div class="col-md-12">
                     <%= link_to "https://www.youtube.com/channel/#{channel.id}" do %>
-                        <strong><%= channel.title.truncate(30) %></strong>
+                        <strong><%= channel.title.truncate(25) %></strong>
                     <% end %>
                 </div>
                 <div class="col-md-6">
-                    <small><%= number_to_human(channel.subscriber_count) if channel.subscriber_count_visible %> subscribers</small>
+                    <small><b><%= number_to_human(channel.subscriber_count) if channel.subscriber_count_visible %></b> subscribers</small>
                 </div>
                 <div class="col-md-6">
-                    <small><%= channel.video_count %> videos</small>
+                    <small><b><%= channel.video_count %></b> videos</small>
                 </div>
             </div>
         </div>
