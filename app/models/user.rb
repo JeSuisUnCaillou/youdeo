@@ -11,8 +11,8 @@ class User < ApplicationRecord
   
   
   has_many :user_channel_tag_relationships
-  has_many :tags, through: :user_channel_tag_relationships
-  has_many :channels, through: :user_channel_tag_relationships
+  has_many :tags, -> { distinct }, through: :user_channel_tag_relationships
+  has_many :channels, -> { distinct }, through: :user_channel_tag_relationships
 
 
 #  EXAMPLE OF RESPONSE FROM GOOGLE OMNIAUTH : (there isn't any email, so I worked around it)
