@@ -11,14 +11,14 @@ class UserChannelTagRelationshipTest < ActiveSupport::TestCase
     rel = UserChannelTagRelationship.create(user: user, tag: tag, channel: channel)
     assert rel.persisted?
     
-    assert_equal user.tags, [tag]
-    assert_equal user.channels, [channel]
+    assert_equal [tag], user.tags
+    assert_equal [channel], user.channels
     
-    assert_equal tag.users, [user]
-    assert_equal tag.channels, [channel]
+    assert_equal [user], tag.users
+    assert_equal [channel], tag.channels
     
-    assert_equal channel.tags, [tag]
-    assert_equal channel.users, [user]
+    assert_equal [tag], channel.tags
+    assert_equal [user], channel.users
   end
   
 
