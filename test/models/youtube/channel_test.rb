@@ -6,9 +6,11 @@ class Youtube::ChannelTest < ActiveSupport::TestCase
     channel_count = Youtube::Channel.count
     channel1 = Youtube::Channel.create(uid: "ex1")
     assert_equal channel_count + 1, Youtube::Channel.count
+    assert channel1.persisted?
     
     #second channel with same uid is not created
     channel2 = Youtube::Channel.create(uid: "ex1")
     assert_equal channel_count + 1, Youtube::Channel.count
+    assert !channel2.persisted?
   end
 end

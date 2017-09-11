@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170911151120) do
+ActiveRecord::Schema.define(version: 20170911152631) do
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -40,6 +40,13 @@ ActiveRecord::Schema.define(version: 20170911151120) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["uid"], name: "index_youtube_channels_on_uid", unique: true
+  end
+
+  create_table "youtube_tags", force: :cascade do |t|
+    t.string "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["title"], name: "index_youtube_tags_on_title", unique: true
   end
 
 end
