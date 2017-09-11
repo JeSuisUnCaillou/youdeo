@@ -9,6 +9,8 @@ class UsersController < ApplicationController
             @subscribed_channels = youtube_api.get_subscribed_channels(@user)
         end
         
+        @tags = @user.tags_with_count
+        
         @elapsed_time = ((DateTime.now - init_time) * 24 * 60 * 60).to_i
     end
     
