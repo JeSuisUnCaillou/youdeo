@@ -8,7 +8,7 @@
 
     <h2>Youtube subscriptions <small>(<%= @subscribed_channels.count %>)</small></h2>
     
-    <%= render partial: "youtube/channels", locals: { channels: @subscribed_channels} %>
+    <%= render partial: "youtube/channels", locals: { channels: @subscribed_channels.values } %>
     
     
     

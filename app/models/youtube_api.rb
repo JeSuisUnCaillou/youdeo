@@ -43,12 +43,15 @@ class YoutubeApi
         
         channels = get_all_subscribed_channels(account)
         
-        channels.map{ |channel| OpenStruct.new(
-            uid: channel["snippet"]["resourceId"]["channelId"],
-            thumbnail_url: channel["snippet"]["thumbnails"]["default"]["url"],
-            title: channel["snippet"]["title"],
-            video_count: channel["contentDetails"]["totalItemCount"]
-        )}
+        channels.map{ |channel| 
+            c = OpenStruct.new(
+                uid: channel["snippet"]["resourceId"]["channelId"],
+                thumbnail_url: channel["snippet"]["thumbnails"]["default"]["url"],
+                title: channel["snippet"]["title"],
+                video_count: channel["contentDetails"]["totalItemCount"]
+            )
+            [c.uid, c]
+        }.to_h
         
     end
     
