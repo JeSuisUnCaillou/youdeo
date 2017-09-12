@@ -48,4 +48,14 @@ class TagsControllerTest < ActionDispatch::IntegrationTest #ActionController::Te
     assert_equal [channel], @user.channels
   end
   
+  test "show page of a tag" do
+    tag = Tag.create(title: "MyLordTag")
+    # channel = Channel.create(uid: "MyLordUid")
+    # UserChannelTagRelationship.create(tag: tag, channel: channel, user: @user)
+    
+    get tag_path(tag)
+    assert_response :success
+    assert_select "h1", tag.title
+  end
+  
 end

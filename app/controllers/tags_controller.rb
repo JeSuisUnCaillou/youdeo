@@ -1,11 +1,8 @@
 class TagsController < ApplicationController
+    
+    before_action :set_tag, only: [:show]
+    
     def create
-        # if(tag.save)
-        #   redirect_to user_path(current_user)
-        # else
-        #   redirect_to user_path(current_user), alert: tag.errors.full_messages.join("\n")
-        # end
-        
         if(user_signed_in?)
             tag = Tag.find_or_create_by(title: tag_params['tag_title'])
             channel = Channel.find_or_create_by(uid: tag_params['channel_uid'])
@@ -21,9 +18,19 @@ class TagsController < ApplicationController
         end
     end
     
+    def show
+        channel_uids = @tag.channels.pluck(:uid)
+        youtube_api = YoutubeApi.new
+        @channels = youtube_api.get_channels(channel_uids)
+    end
+    
     private
     
         def tag_params
            params.permit(:tag_title, :channel_uid)
+        end
+        
+        def set_tag
+            @tag = Tag.find(params[:id]) || Tag.find(params[:tag_id])
         end
 end

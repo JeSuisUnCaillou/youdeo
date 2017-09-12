@@ -14,7 +14,7 @@
           </li>
           <li class="navbar-brand">
             <%= link_to user_path(current_user), 'data-toggle': "tooltip", 'data-placement': "bottom", title: "Go to your profile" do %>
-              <%= image_tag current_user.google_image_url, class: "img-fluid rounded", width: "30px" %>
+              <%= image_tag current_user.google_image_url, class: "img-fluid rounded", width: "30px" if current_user.google_image_url %>
             <% end %>
           </li>
         <% else %>

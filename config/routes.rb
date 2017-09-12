@@ -10,6 +10,6 @@ Rails.application.routes.draw do
     }
     
     resources :users, only: [:show]
-    resources :tags, only: [:create]
+    resources :tags, only: [:create, :show]
     
 end

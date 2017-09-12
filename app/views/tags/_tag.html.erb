@@ -1,10 +1,11 @@
 <% tag_title ||= "Tag Title" %>
 <% channels ||= [] %>
 
-<h2>
-    <%= tag_title %> (<%= channels.count %>)
-</h2>
-
+<%= link_to tag_path(Tag.find_by(title: tag_title)) do %>
+    <h2>
+        <%= tag_title %> <small>(<%= channels.count %>)</small>
+    </h2>
+<% end %>
 
 <%= render partial: "youtube/channels", locals: { channels: channels } %>
 
