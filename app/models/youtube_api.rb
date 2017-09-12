@@ -72,34 +72,30 @@ class YoutubeApi
     private
     
         def get_all_subscribed_channels(account)
-            get_subscribed_channels_page(account, nil)
-        end
-        
-        def get_subscribed_channels_page(account, page_token)
-            url = URI.parse "https://www.googleapis.com/youtube/v3/subscriptions?part=snippet%2CcontentDetails&channelId=#{account.channel.id}&maxResults=50&key=#{API_KEY}&pageToken=#{page_token}"
-            res = Net::HTTP.get(url)
-            json = ActiveSupport::JSON.decode(res)
-            channels = json["items"]
-            channels = channels + get_subscribed_channels_page(account, json["nextPageToken"]) if json["nextPageToken"].present?
-            
-            return channels
+            url = "https://www.googleapis.com/youtube/v3/subscriptions?part=snippet%2CcontentDetails&channelId=#{account.channel.id}"
+            get_resource(url)
         end
         
         def get_all_channels(channel_uids)
-            get_channels_page(channel_uids, nil)
-        end
-        
-        def get_channels_page(channel_uids, page_token)
             uids_string = channel_uids.join(", ")
-            url = URI.parse "https://www.googleapis.com/youtube/v3/channels?part=snippet%2CcontentDetails%2Cstatistics&id=#{uids_string}&maxResults=50&key=#{API_KEY}&pageToken=#{page_token}"
-            res = Net::HTTP.get(url)
-            json = ActiveSupport::JSON.decode(res)
-            channels = json["items"]
-            channels = channels + get_channels_page(channel_uids, json["nextPageToken"]) if json["nextPageToken"].present?
-            
-            return channels
+            url = "https://www.googleapis.com/youtube/v3/channels?part=snippet%2CcontentDetails%2Cstatistics&id=#{uids_string}"
+            get_resource(url)
         end
         
+        
+        def get_resource(url)
+            get_resource_page(url, nil)
+        end
+        
+        def get_resource_page(url, page_token)
+            full_url = URI.parse "#{url}&maxResults=50&key=#{API_KEY}&pageToken=#{page_token}"
+            res = Net::HTTP.get(full_url)
+            json = ActiveSupport::JSON.decode(res)
+            items = json["items"]
+            items = items + get_resource_page(url, json["nextPageToken"]) if json["nextPageToken"].present?
+            
+            return items
+        end
         
         def initialize_secret_keys
             if(API_KEY)
