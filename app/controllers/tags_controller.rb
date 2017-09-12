@@ -22,6 +22,11 @@ class TagsController < ApplicationController
         channel_uids = @tag.channels.pluck(:uid)
         youtube_api = YoutubeApi.new
         @channels = youtube_api.get_channels(channel_uids)
+        
+        # /!\ Might be very long ?
+        @videos = @channels.values.map{ |channel| 
+            youtube_api.get_playlist_videos(channel.upload_playlist_id).values
+        }.flatten
     end
     
     private

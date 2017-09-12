@@ -1,0 +1,5 @@
+<% videos ||= [] %>
+
+<% videos.each do |video| %>
+    <%= render partial: "youtube/video", locals: { video: video } %>
+<% end %>
