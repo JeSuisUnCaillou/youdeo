@@ -3,7 +3,6 @@
 <% if user_signed_in? && @user == current_user %>
     <p>(this is you) <%= @elapsed_time %>s</p>
     
-    <h2>Your Tags</h2>
     
     <%= render partial: "tags/tags", locals: { tags: @tags } %>
 
