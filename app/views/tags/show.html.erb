@@ -1,6 +1,12 @@
+<% sorted_videos = @videos.sort_by{ |video| video.published_at }.reverse %>
+
+
 <h1><%= @tag.title %></h1>
 
 <%= render partial: "youtube/channels", locals: { channels: @channels.values } %>
 
 <h2>Last videos from <%= @tag.title %></h2>
-<%= render partial: "youtube/videos", locals: { videos: @videos } %>
+
+<%= render partial: "youtube/video_player", locals: { video: sorted_videos.first } %>
+
+<%= render partial: "youtube/videos", locals: { videos: sorted_videos } %>
