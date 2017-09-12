@@ -111,4 +111,14 @@ class UserTest < ActiveSupport::TestCase
     assert_equal({tag1.title => [channel1.uid], tag2.title => [channel1.uid, channel2.uid]}, user.tags_with_channels)
   end
   
+  test "split infos between tagged and untagged channels" do
+    tags_hash = { title1: ["uid1"], title2: ["uid2", "uid3"] }
+    channels_hash = { "uid1": {title: "channel1"}, "uid2": {title: "channel2"}, "uid3": {title: "channel3"}, "uid4": {title: "channel4"} }
+    
+    new_tags_hash, new_channels_hash = User.new.split_infos(tags_hash, channels_hash)
+    
+    assert_equal({ title1: {title: "channel1"}, title2: [{title: "channel2"}, {title: "channel3"}] }, new_tags_hash)
+    assert_equal({"uid4": {title: "channel4"}}, new_channels_hash)
+  end
+  
 end

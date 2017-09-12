@@ -15,6 +15,30 @@ class User < ApplicationRecord
     has_many :channels, -> { distinct }, through: :user_channel_tag_relationships
 
 
+
+    # Returns 2 hashes, on with { tag_title: channel_list} the other with {uid: channel}
+    def tags_and_channels_hashs
+        youtube_api = YoutubeApi.new
+        subscribed_channels = youtube_api.get_subscribed_channels(self)
+        tags_hash = self.tags_with_channels
+        
+        split_infos(tags_hash, subscribed_channels)
+    end
+    
+    # Takes the channels infos from channels hash and put them in the tags hash.
+    # Returns both hash
+    def split_infos(tags_hash, channels_hash)
+        new_tags_hash = tags_hash.map{ |tag_title, uids|
+            [tag_title, uids.map{ |uid| 
+                channel = channels_hash.delete(uid)
+                channel
+            }]
+        }.to_h
+        
+        [new_tags_hash, channels_hash]
+    end
+
+    # Returns a hash with channel titles as keys, and list of channels as values
     def tags_with_channels
        tags.joins("INNER JOIN channels ON user_channel_tag_rels.channel_id = channels.id")
             .group('tags.title, channels.uid')
