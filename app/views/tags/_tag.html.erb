@@ -1,3 +1,4 @@
-<% tag ||= ["Tag Title", 0] %>
+<% tag_title ||= "Tag Title" %>
+<% channels ||= [] %>
 
-<%= tag[0] %> (<%= tag[1] %>)
+<%= tag_title %> (<%= channels.count %>)

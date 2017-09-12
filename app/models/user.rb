@@ -15,10 +15,18 @@ class User < ApplicationRecord
     has_many :channels, -> { distinct }, through: :user_channel_tag_relationships
 
 
-    def tags_with_count
-       tags.group('tags.title')
-           .pluck('tags.title, count(user_channel_tag_rels.channel_id) as channel_count')
-           .to_h
+    def tags_with_channels
+       tags.joins("INNER JOIN channels ON user_channel_tag_rels.channel_id = channels.id")
+            .group('tags.title, channels.uid')
+            .pluck('tags.title, channels.uid')
+            .inject({}) { |hash, columns| 
+                if hash[columns[0]]
+                    hash[columns[0]] << columns[1]
+                else
+                    hash[columns[0]] = [columns[1]]
+                end
+                hash
+            }
     end
 
     #  EXAMPLE OF RESPONSE FROM GOOGLE OMNIAUTH : (there isn't any email, so I worked around it)
