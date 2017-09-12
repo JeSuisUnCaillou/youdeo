@@ -64,9 +64,24 @@ class YoutubeApi
                 thumbnail_url: channel["snippet"]["thumbnails"]["default"]["url"],
                 title: channel["snippet"]["title"],
                 video_count: channel["statistics"]["videoCount"],
-                upload_playlist_id: channel["ContentDetails"]["relatedPlaylists"]["uploads"]
+                upload_playlist_id: channel["contentDetails"]["relatedPlaylists"]["uploads"]
             )
             [c.uid, c]
+        }.to_h
+    end
+    
+    def get_playlist_videos(playlist_id)
+        items = get_all_playlist_items(playlist_id)
+        
+        items.select{ |item| item["snippet"]["thumbnails"].present? } #remove the videos without thumbnails, aka private ones
+          .map{ |item|
+            v = OpenStruct.new(
+                uid: item["contentDetails"]["videoId"],
+                thumbnail_url: item["snippet"]["thumbnails"]["default"]["url"],
+                title: item["snippet"]["title"],
+                published_at: item["contentDetails"]["videoPublishedAt"]
+            )
+            [v.uid, v]
         }.to_h
     end
     
@@ -80,6 +95,11 @@ class YoutubeApi
         def get_all_channels(channel_uids)
             uids_string = channel_uids.join(", ")
             url = "https://www.googleapis.com/youtube/v3/channels?part=snippet%2CcontentDetails%2Cstatistics&id=#{uids_string}"
+            get_resource(url)
+        end
+        
+        def get_all_playlist_items(playlist_id)
+            url = "https://www.googleapis.com/youtube/v3/playlistItems?part=snippet%2CcontentDetails&playlistId=#{playlist_id}"
             get_resource(url)
         end
         

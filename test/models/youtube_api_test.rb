@@ -54,4 +54,17 @@ class YoutubeApiTest < ActiveSupport::TestCase
     assert_not_nil first_channel.upload_playlist_id
   end
   
+  test "get videos from a playlist" do
+    playlist_uid = "PLBCF2DAC6FFB574DE"
+    
+    videos = @youtube_api.get_playlist_videos(playlist_uid)
+    assert 4 < videos.count
+    first_video = videos.values.first
+    assert_not_nil first_video.uid
+    assert_not_nil first_video.thumbnail_url
+    assert_not_nil first_video.title
+    assert_not_nil first_video.published_at
+    
+  end
+  
 end
