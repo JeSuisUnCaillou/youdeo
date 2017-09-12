@@ -55,6 +55,20 @@ class YoutubeApi
         
     end
     
+    def get_channels(channel_uids)
+        channels = get_all_channels(channel_uids)
+        
+        channels.map{ |channel| 
+            c = OpenStruct.new(
+                uid: channel["id"],
+                thumbnail_url: channel["snippet"]["thumbnails"]["default"]["url"],
+                title: channel["snippet"]["title"],
+                video_count: channel["statistics"]["videoCount"]
+            )
+            [c.uid, c]
+        }.to_h
+    end
+    
     private
     
         def get_all_subscribed_channels(account)
@@ -70,6 +84,22 @@ class YoutubeApi
             
             return channels
         end
+        
+        def get_all_channels(channel_uids)
+            get_channels_page(channel_uids, nil)
+        end
+        
+        def get_channels_page(channel_uids, page_token)
+            uids_string = channel_uids.join(", ")
+            url = URI.parse "https://www.googleapis.com/youtube/v3/channels?part=snippet%2CcontentDetails%2Cstatistics&id=#{uids_string}&maxResults=50&key=#{API_KEY}&pageToken=#{page_token}"
+            res = Net::HTTP.get(url)
+            json = ActiveSupport::JSON.decode(res)
+            channels = json["items"]
+            channels = channels + get_channels_page(channel_uids, json["nextPageToken"]) if json["nextPageToken"].present?
+            
+            return channels
+        end
+        
         
         def initialize_secret_keys
             if(API_KEY)

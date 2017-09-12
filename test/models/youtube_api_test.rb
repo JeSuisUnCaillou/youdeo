@@ -28,7 +28,7 @@ class YoutubeApiTest < ActiveSupport::TestCase
     assert_equal "JeSuisUnCaill0u", account.name
   end
   
-  test "get account's channels" do
+  test "get account's subscribed channels" do
     user = User.first 
     user.google_refresh_token = "1/neJAsmsyiNlDkj6sG7Df2c4afUHNkKdV5IQ9uXFmv6Q"
     channels = @youtube_api.get_subscribed_channels(user)
@@ -41,5 +41,16 @@ class YoutubeApiTest < ActiveSupport::TestCase
     assert_not_nil first_channel.video_count
   end
   
+  test "get multiple channels infos" do
+    channels_uids = ["UC_x5XG1OV2P6uZZ5FSM9Ttw", "UCrEIilIgRtGlYlbR0QLHb5g"]
+    
+    channels = @youtube_api.get_channels(channels_uids)
+    assert_equal 2, channels.count
+    first_channel = channels.values.first
+    assert_not_nil first_channel.uid
+    assert_not_nil first_channel.thumbnail_url
+    assert_not_nil first_channel.title
+    assert_not_nil first_channel.video_count
+  end
   
 end
