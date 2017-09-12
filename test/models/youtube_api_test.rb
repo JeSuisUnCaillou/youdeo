@@ -51,6 +51,7 @@ class YoutubeApiTest < ActiveSupport::TestCase
     assert_not_nil first_channel.thumbnail_url
     assert_not_nil first_channel.title
     assert_not_nil first_channel.video_count
+    assert_not_nil first_channel.upload_playlist_id
   end
   
 end

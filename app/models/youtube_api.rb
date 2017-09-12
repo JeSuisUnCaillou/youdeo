@@ -63,7 +63,8 @@ class YoutubeApi
                 uid: channel["id"],
                 thumbnail_url: channel["snippet"]["thumbnails"]["default"]["url"],
                 title: channel["snippet"]["title"],
-                video_count: channel["statistics"]["videoCount"]
+                video_count: channel["statistics"]["videoCount"],
+                upload_playlist_id: channel["ContentDetails"]["relatedPlaylists"]["uploads"]
             )
             [c.uid, c]
         }.to_h
