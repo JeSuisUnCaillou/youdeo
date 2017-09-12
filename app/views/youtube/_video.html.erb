@@ -1,6 +1,12 @@
 <% video ||= {} %>
 
-<div>
-    <%= image_tag video.thumbnail_url, class: "img-fluid" %>
-    <%= video.title %>
+
+<div class="card" style="width: 20rem;">
+    <%= link_to "https://www.youtube.com/watch?v=#{video.uid}" do %>
+      <img class="card-img-top img-fluid" src="<%= video.thumbnail_url %>" alt="Card image cap">
+      <div class="card-block p-2">
+        <h4 class="card-title"><%= video.title %></h4>
+        <p class="card-text"><%= time_ago_in_words(video.published_at) %></p>
+      </div>
+    <% end %>
 </div>

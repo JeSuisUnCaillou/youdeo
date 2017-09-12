@@ -77,7 +77,7 @@ class YoutubeApi
           .map{ |item|
             v = OpenStruct.new(
                 uid: item["contentDetails"]["videoId"],
-                thumbnail_url: item["snippet"]["thumbnails"]["default"]["url"],
+                thumbnail_url: item["snippet"]["thumbnails"]["medium"]["url"],
                 title: item["snippet"]["title"],
                 published_at: item["contentDetails"]["videoPublishedAt"]
             )
