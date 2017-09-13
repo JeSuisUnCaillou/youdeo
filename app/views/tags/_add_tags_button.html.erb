@@ -1,0 +1,7 @@
+<% channel ||= {} %>
+
+<button type="button" class="btn btn-secondary pl-1 pr-1 pb-1 pt-0" data-toggle="modal" data-target="#<%=channel.uid%>_modal">
+  + tags
+</button>
+
+<%= render partial: "tags/tags_modal", locals: { channel: channel } %>
