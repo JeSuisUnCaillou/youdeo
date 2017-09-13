@@ -12,7 +12,6 @@ class UsersController < ApplicationController
             }.to_h
         end
         
-        
         @elapsed_time = ((DateTime.now - init_time) * 24 * 60 * 60).to_i
     end
     

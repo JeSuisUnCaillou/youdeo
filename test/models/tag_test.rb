@@ -19,4 +19,9 @@ class TagTest < ActiveSupport::TestCase
     assert_equal tag_count + 1, Tag.count
     assert !tag2.persisted?
   end
+  
+  test "get tag with channels count hash" do
+    tags_hash = Tag.all_with_channels_count
+    assert_equal({"TitleOne"=>1}, tags_hash)
+  end
 end
