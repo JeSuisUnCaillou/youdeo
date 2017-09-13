@@ -18,6 +18,7 @@
                 <div>
                     <small><b><%= channel.video_count %></b> videos</small>
                     
+                    <%#= render partial: "tags/tags", locals: { tags: [] } %>
                     <%= render partial: "tags/add_tags_button", locals: { channel: channel } %>
                     
                 </div>
