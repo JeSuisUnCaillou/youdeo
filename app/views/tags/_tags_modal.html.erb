@@ -29,11 +29,12 @@
                         <%= render partial: "tags/tags", locals: { tags: @channels_with_tags[channel.uid], no_link: true } %>
                         <%= render partial: "tags/tag", locals: {klass: "tag_model"} %>
                     </div>
-                    <div class="">
-                        <%= text_field_tag 'title_field', nil, placeholder: "Create a new Tag", class: "title_field", "attr-uid": channel.uid %>
-                        <%= link_to "+", "#", class: "btn btn-secondary pl-2 pr-2 pb-1 pt-1 add_new_tag", "attr-uid": channel.uid %>
-                    </div>
                 </div>
+            </div>
+            
+            <div class="mt-2">
+                <%= text_field_tag 'title_field', nil, placeholder: "Create a new Tag", class: "title_field", "attr-uid": channel.uid %>
+                <%= link_to "+", "#", class: "btn btn-secondary pl-2 pr-2 pb-1 pt-1 add_new_tag", "attr-uid": channel.uid %>
             </div>
             
             <div class="my_tags" attr-uid="<%= channel.uid %>">
