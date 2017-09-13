@@ -1,5 +1,0 @@
-<% tags ||= {} %>
-
-<% tags.each do |tag_title, channels| %>
-    <%= render partial: "tags/tag", locals: { tag_title: tag_title, channels: channels } %>
-<% end %>

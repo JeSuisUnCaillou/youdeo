@@ -19,7 +19,7 @@ class TagsControllerTest < ActionDispatch::IntegrationTest #ActionController::Te
     channel_count = Channel.count
     rel_count = UserChannelTagRelationship.count
 
-    post tags_path, params: { tag_title: "MyTag", channel_uid: "MyUid" }
+    post tags_path, params: { tag_titles: ["MyTag"], channel_uid: "MyUid" }
     assert_response :redirect
     
     assert_equal tag_count + 1, Tag.count
@@ -35,7 +35,7 @@ class TagsControllerTest < ActionDispatch::IntegrationTest #ActionController::Te
     channel_count = Channel.count
     rel_count = UserChannelTagRelationship.count
 
-    post tags_path, params: { tag_title: "MyTag", channel_uid: "MyUid" }
+    post tags_path, params: { tag_titles: ["MyTag"], channel_uid: "MyUid" }
     assert_response :redirect
     
     assert_equal tag_count, Tag.count

@@ -30,12 +30,14 @@ class User < ApplicationRecord
     def split_infos(tags_hash, channels_hash)
         new_tags_hash = tags_hash.map{ |tag_title, uids|
             [tag_title, uids.map{ |uid| 
-                channel = channels_hash.delete(uid)
+                channel = channels_hash[uid]
                 channel
             }]
         }.to_h
         
-        [new_tags_hash, channels_hash]
+        new_channels_hash = channels_hash.except(*tags_hash.values.flatten)
+        
+        [new_tags_hash, new_channels_hash]
     end
 
     # Returns a hash with channel titles as keys, and list of channels as values

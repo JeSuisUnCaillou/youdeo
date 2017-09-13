@@ -1,11 +1,11 @@
-<% tag_title ||= "Tag Title" %>
-<% channels ||= [] %>
+<% channel ||= OpenStruct.new(uid: "") %>
+<% tag_title ||= "" %>
+<% channels_count ||= 0 %>
+<% klass ||= %>
 
-<%= link_to tag_path(Tag.find_by(title: tag_title)) do %>
-    <h2>
-        <%= tag_title %> <small>(<%= channels.count %>)</small>
-    </h2>
+<% title_with_count = channels_count > 0 ? "#{tag_title} (#{channels_count})" : tag_title %>
+
+<%= link_to "#", class: "btn btn-secondary pl-1 pr-1 pb-1 pt-0 add_tag #{klass}", "attr-uid": channel.uid, "attr-title": tag_title, "attr-channels-count": channels_count do %>
+    <div class="tag_text"><%= title_with_count %></div>
+    <%# input type="hidden" name="tag_titles[]" id="tag_titles" value="Test Tag" %>
 <% end %>
-
-<%= render partial: "youtube/channels", locals: { channels: channels } %>
-

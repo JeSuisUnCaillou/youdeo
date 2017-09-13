@@ -4,15 +4,23 @@ class TagsController < ApplicationController
     
     def create
         if(user_signed_in?)
-            tag = Tag.find_or_create_by(title: tag_params['tag_title'])
-            channel = Channel.find_or_create_by(uid: tag_params['channel_uid'])
-        
-            relation = UserChannelTagRelationship.new(tag: tag, channel: channel, user: current_user)
-            if(relation.save)
+            error_messages = []
+            tag_params['tag_titles'].each do |tag_title|
+                tag = Tag.find_or_create_by(title: tag_title)
+                channel = Channel.find_or_create_by(uid: tag_params['channel_uid'])
+            
+                relation = UserChannelTagRelationship.new(tag: tag, channel: channel, user: current_user)
+                if(!relation.save)
+                    error_messages += relation.errors.full_messages
+                end
+            end
+            
+            if(error_messages.empty?)
                 redirect_to user_path(current_user)
             else
-                redirect_to user_path(current_user), alert: relation.errors.full_messages.join("\n")
+                redirect_to user_path(current_user), alert: error_messages.join("\n")
             end
+            
         else
             redirect_to user_path(current_user), alert: "You must be signed in."
         end
@@ -32,7 +40,7 @@ class TagsController < ApplicationController
     private
     
         def tag_params
-            params.permit(:tag_title, :channel_uid, tag_titles: [])
+            params.permit(:channel_uid, tag_titles: [])
         end
         
         def set_tag

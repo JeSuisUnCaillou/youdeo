@@ -29,19 +29,19 @@
                     <div>
                         <div class="tags_fields" attr-uid="<%= channel.uid %>">
                             <%= hidden_field_tag('channel_uid', channel.uid)%>
+                            
+                            <%= render partial: "tags/tag", locals: {klass: "tag_model"} %>
                         </div>
                         
                         <div class="">
-                            <p>New tag</p>    
-                            <%= text_field_tag 'tag_title', nil, placeholder: "Create a new Tag" %>
+                            <%= text_field_tag 'title_field', nil, placeholder: "Create a new Tag", class: "title_field", "attr-uid": channel.uid %>
+                            <%= link_to "+", "#", class: "btn btn-secondary pl-2 pr-2 pb-1 pt-1 add_new_tag", "attr-uid": channel.uid %>
                         </div>
                         
                         <div class="my_tags" attr-uid="<%= channel.uid %>">
                             <p>My tags</p>
                             <% @my_tags_with_count.each do |tag_title, channels_count| %>
-                                <%= link_to "#", class: "btn btn-secondary pl-1 pr-1 pb-1 pt-0 add_tag", "attr-uid": channel.uid, "attr-title": tag_title do %>
-                                    <%= "#{tag_title} (#{channels_count})" %>
-                                <% end %>
+                                <%= render partial: "tags/tag", locals: {channel: channel, tag_title: tag_title, channels_count: channels_count} %>
                             <% end %>    
                         </div>
                         

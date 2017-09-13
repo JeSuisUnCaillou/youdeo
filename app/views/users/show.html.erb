@@ -4,7 +4,7 @@
     <p>(this is you) <%= @elapsed_time %>s</p>
     
     
-    <%= render partial: "tags/tags", locals: { tags: @tags } %>
+    <%= render partial: "tags/tags_with_channels", locals: { tags: @tags } %>
 
     <h2>Channels without tags <small>(<%= @uncategorized_channels.count %>)</small></h2>
     
