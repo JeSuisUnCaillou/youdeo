@@ -36,13 +36,9 @@
                 </div>
             </div>
             
-            
-            
             <div class="my_tags" attr-uid="<%= channel.uid %>">
-                <p>My tags</p>
-                <% @my_tags_with_count.each do |tag_title, channels_count| %>
-                    <%= render partial: "tags/tag", locals: {channel: channel, tag_title: tag_title, channels_count: channels_count} %>
-                <% end %>    
+                <strong>My other tags</strong><br />
+                <%= render partial: "tags/tags", locals: { tags: @my_tags_with_count, channel: channel} %>
             </div>
         </div>
         

@@ -1,7 +1,7 @@
 <% channel ||= OpenStruct.new(uid: "") %>
 <% tag_title ||= "" %>
 <% channels_count ||= 0 %>
-<% klass ||= %>
+<% klass ||= "" %>
 
 <% title_with_count = channels_count > 0 ? "#{tag_title} (#{channels_count})" : tag_title %>
 

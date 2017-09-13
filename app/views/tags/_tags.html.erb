@@ -1,0 +1,6 @@
+<% tags ||= [] %>
+<% channel ||= OpenStruct.new(uid: "") %>
+
+<% @tags.each do |tag_title, channels| %>
+    <%= render partial: "tags/tag", locals: {channel: channel, tag_title: tag_title, channels_count: channels.count} %>
+<% end %>   
