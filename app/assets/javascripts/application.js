@@ -12,12 +12,14 @@
 //
 //= require rails-ujs
 //= require turbolinks
-//= require_tree .
 //= require jquery3
 //= require popper
 //= require bootstrap-sprockets
+//= require_tree .
 
 
+//Bootstrap tooltips enabled
 $(function () {
   $('[data-toggle="tooltip"]').tooltip()
 })
+
