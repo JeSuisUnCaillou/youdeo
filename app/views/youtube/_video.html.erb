@@ -1,7 +1,7 @@
 <% video ||= nil %>
 
 <% if video %>
-    <div class="card" style="width: 20rem;">
+    <div class="card">
         <%= link_to "https://www.youtube.com/watch?v=#{video.uid}" do %>
           <img class="card-img-top img-fluid" src="<%= video.thumbnail_url %>" alt="Card image cap">
           <div class="card-block p-2">
