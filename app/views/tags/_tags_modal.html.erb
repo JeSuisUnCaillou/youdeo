@@ -26,7 +26,7 @@
                     <% end %>
                     <div class="tags_fields" attr-uid="<%= channel.uid %>">
                         <%= hidden_field_tag('channel_uid', channel.uid)%>
-                        
+                        <%= render partial: "tags/tags", locals: { tags: @channels_with_tags[channel.uid], no_link: true } %>
                         <%= render partial: "tags/tag", locals: {klass: "tag_model"} %>
                     </div>
                     <div class="">
@@ -38,7 +38,7 @@
             
             <div class="my_tags" attr-uid="<%= channel.uid %>">
                 <strong>My other tags</strong><br />
-                <%= render partial: "tags/tags", locals: { tags: @my_tags_with_count, channel: channel } %>
+                <%= render partial: "tags/tags", locals: { tags: @my_tags_with_count.except(*@channels_with_tags[channel.uid]), channel: channel } %>
                 
                 <% if @other_tags_with_count.present? %>
                     <br />
