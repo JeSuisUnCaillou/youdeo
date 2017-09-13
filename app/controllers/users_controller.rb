@@ -1,6 +1,10 @@
 class UsersController < ApplicationController
     before_action :set_user, only: [:show]
     
+    def index
+        
+    end
+    
     def show
         init_time = DateTime.now
         

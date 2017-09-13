@@ -11,6 +11,11 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
         assert_response :success
         assert_select "h1", @user.name
     end
+    
+    test "users page should exist" do
+        get users_path
+        assert_response :success
+    end
    
    
 end
