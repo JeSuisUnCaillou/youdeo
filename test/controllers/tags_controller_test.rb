@@ -55,7 +55,7 @@ class TagsControllerTest < ActionDispatch::IntegrationTest #ActionController::Te
     
     get tag_path(tag)
     assert_response :success
-    assert_select "h1", tag.title
+    assert_select "h1", "Last videos from #{tag.title}"
   end
   
 end

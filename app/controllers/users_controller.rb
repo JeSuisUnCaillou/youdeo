@@ -6,6 +6,10 @@ class UsersController < ApplicationController
         
         if(current_user == @user)
             @tags, @uncategorized_channels = @user.tags_and_channels_hashs
+            
+            @my_tags_with_count = @tags.map{ |tag_title, channels|
+                [tag_title, channels.count]
+            }.to_h
         end
         
         

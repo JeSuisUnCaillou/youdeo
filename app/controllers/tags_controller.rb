@@ -32,7 +32,7 @@ class TagsController < ApplicationController
     private
     
         def tag_params
-           params.permit(:tag_title, :channel_uid)
+            params.permit(:tag_title, :channel_uid, tag_titles: [])
         end
         
         def set_tag
