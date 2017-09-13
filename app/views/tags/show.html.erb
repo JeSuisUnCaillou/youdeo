@@ -1,4 +1,4 @@
-<% sorted_videos = @videos.sort_by{ |video| video.published_at }.reverse %>
+<% sorted_videos = @videos.sort_by{ |video| video.published_at }.reverse.take(12) %>
 
 <%#= render partial: "youtube/channels", locals: { channels: @channels.values } %>
 

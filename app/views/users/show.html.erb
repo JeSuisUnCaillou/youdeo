@@ -8,7 +8,7 @@
 
     <h2>Channels without tags <small>(<%= @uncategorized_channels.count %>)</small></h2>
     
-    <%= render partial: "youtube/channels", locals: { channels: @uncategorized_channels.values } %>
+    <%= render partial: "youtube/channels", locals: { channels: @uncategorized_channels.values.take(12) } %>
     
     
     
