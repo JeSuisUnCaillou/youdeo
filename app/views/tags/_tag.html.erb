@@ -2,10 +2,19 @@
 <% tag_title ||= "" %>
 <% channels_count ||= 0 %>
 <% klass ||= "" %>
+<% no_link = no_link.nil? ? false : no_link %>
 
 <% title_with_count = channels_count > 0 ? "#{tag_title} (#{channels_count})" : tag_title %>
 
-<%= link_to "#", class: "btn btn-secondary pl-1 pr-1 pb-1 pt-0 add_tag #{klass}", "attr-uid": channel.uid, "attr-title": tag_title, "attr-channels-count": channels_count do %>
-    <div class="tag_text"><%= title_with_count %></div>
-    <%# input type="hidden" name="tag_titles[]" id="tag_titles" value="Test Tag" %>
+
+<% if no_link %>
+    <div class="btn btn-secondary pl-1 pr-1 pb-1 pt-0"><%= title_with_count %></div>
+    
+<% else %>
+
+    <%= link_to "#", class: "btn btn-secondary pl-1 pr-1 pb-1 pt-0 add_tag #{klass}", "attr-uid": channel.uid, "attr-title": tag_title, "attr-channels-count": channels_count do %>
+        <div class="tag_text"><%= title_with_count %></div>
+        <%# input type="hidden" name="tag_titles[]" id="tag_titles" value="Test Tag" %>
+    <% end %>
+    
 <% end %>

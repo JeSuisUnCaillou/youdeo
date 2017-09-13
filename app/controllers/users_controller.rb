@@ -12,6 +12,8 @@ class UsersController < ApplicationController
             }.to_h
             
             @other_tags_with_count = Tag.all_with_channels_count.except(*@tags.keys)
+            
+            @channels_with_tags = @user.channels_with_tags
         end
         
         

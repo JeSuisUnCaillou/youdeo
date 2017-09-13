@@ -1,6 +1,7 @@
 <% tags ||= {} %>
 <% channel ||= OpenStruct.new(uid: "") %>
+<% no_link = no_link.nil? ? false : no_link %>
 
 <% tags.each do |tag_title, channels_count| %>
-    <%= render partial: "tags/tag", locals: {channel: channel, tag_title: tag_title, channels_count: channels_count} %>
+    <%= render partial: "tags/tag", locals: {channel: channel, tag_title: tag_title, channels_count: channels_count, no_link: no_link} %>
 <% end %>
