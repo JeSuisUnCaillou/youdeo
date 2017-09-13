@@ -2,7 +2,7 @@
 
 <% if video %>
     <div class="card">
-        <%= link_to "https://www.youtube.com/watch?v=#{video.uid}" do %>
+        <%= link_to "", class: "video_card", 'attr-uid': video.uid do %>
           <img class="card-img-top img-fluid" src="<%= video.thumbnail_url %>" alt="Card image cap">
           <div class="card-block p-2">
             <h4 class="card-title"><%= video.title %></h4>
