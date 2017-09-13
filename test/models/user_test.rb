@@ -98,7 +98,7 @@ class UserTest < ActiveSupport::TestCase
   
   
   
-  test "get tags with channels" do 
+  test "get tags_with_channels, and get channels_with_tags" do 
     user = User.create(email: "myname@test.com", password: "123bonjour", password_confirmation: "123bonjour")
     tag1 = Tag.create(title: "ex1")
     tag2 = Tag.create(title: "ex2")
@@ -109,7 +109,9 @@ class UserTest < ActiveSupport::TestCase
     UserChannelTagRelationship.create(user: user, tag: tag2, channel: channel2)
     
     assert_equal({tag1.title => [channel1.uid], tag2.title => [channel1.uid, channel2.uid]}, user.tags_with_channels)
+    assert_equal({channel1.uid => [tag1.title, tag2.title], channel2.uid => [tag2.title]}, user.channels_with_tags)
   end
+
   
   test "split infos between tagged and untagged channels" do
     tags_hash = { title1: ["uid1"], title2: ["uid2", "uid3"] }

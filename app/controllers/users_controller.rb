@@ -10,9 +10,10 @@ class UsersController < ApplicationController
             @my_tags_with_count = @tags.map{ |tag_title, channels|
                 [tag_title, channels.count]
             }.to_h
+            
+            @other_tags_with_count = Tag.all_with_channels_count.except(*@tags.keys)
         end
         
-        @other_tags_with_count = Tag.all_with_channels_count.except(*@tags.keys)
         
         @elapsed_time = ((DateTime.now - init_time) * 24 * 60 * 60).to_i
     end
