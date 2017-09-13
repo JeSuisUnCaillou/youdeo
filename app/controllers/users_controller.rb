@@ -12,6 +12,8 @@ class UsersController < ApplicationController
             }.to_h
         end
         
+        @other_tags_with_count = Tag.all_with_channels_count.except(*@tags.keys)
+        
         @elapsed_time = ((DateTime.now - init_time) * 24 * 60 * 60).to_i
     end
     

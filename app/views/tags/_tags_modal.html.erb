@@ -40,6 +40,11 @@
                 <strong>My other tags</strong><br />
                 <%= render partial: "tags/tags", locals: { tags: @my_tags_with_count, channel: channel } %>
                 
+                <% if @other_tags_with_count.present? %>
+                    <br />
+                    <strong>All other existing tags</strong><br />
+                    <%= render partial: "tags/tags", locals: { tags: @other_tags_with_count, channel: channel } %>
+                <% end %>
             </div>
         </div>
         
