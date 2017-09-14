@@ -19,7 +19,7 @@
                     <small><b><%= channel.video_count %></b> videos</small>
                     
                     <%#= render partial: "tags/tags", locals: { tags: @channels_with_tags[channel.uid], no_link: true } %>
-                    <%= render partial: "tags/add_tags_button", locals: { channel: channel } %>
+                    <%= render partial: "tags/add_tags_button", locals: { channel: channel } if @user == current_user %>
                     
                 </div>
             </div>
