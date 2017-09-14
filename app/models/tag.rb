@@ -24,4 +24,15 @@ class Tag < ApplicationRecord
                 hash
             }
     end
+    
+    def self.all_with_channels_hash
+        tags = Tag.all_with_channels
+        youtube_api = YoutubeApi.new
+        
+        channels = youtube_api.get_channels(tags.values.flatten)
+        
+        tags_with_channels, chans = User.new.split_infos(tags, channels)
+        
+        tags_with_channels
+    end
 end

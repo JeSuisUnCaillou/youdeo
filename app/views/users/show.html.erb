@@ -1,4 +1,4 @@
-<h1><%= @user.name %></h1>
+<h1><%= @user.name || @user.email.split("@").first %></h1>
 
 <% if @user.google_refresh_token.present? %>
     

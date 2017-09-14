@@ -1,5 +1,6 @@
 <% tags ||= {} %>
+<% no_link ||= false %>
 
 <% tags.each do |tag_title, channels| %>
-    <%= render partial: "tags/tag_with_channels", locals: { tag_title: tag_title, channels: channels } %>
+    <%= render partial: "tags/tag_with_channels", locals: { tag_title: tag_title, channels: channels, no_link: no_link } %>
 <% end %>

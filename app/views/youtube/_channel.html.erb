@@ -1,4 +1,5 @@
 <% channel ||= nil %>
+<% no_link ||= false %>
 
 <% if channel %>
     <div class="card">
@@ -19,7 +20,7 @@
                     <small><b><%= channel.video_count %></b> videos</small>
                     
                     <%#= render partial: "tags/tags", locals: { tags: @channels_with_tags[channel.uid], no_link: true } %>
-                    <%= render partial: "tags/add_tags_button", locals: { channel: channel } if @user == current_user %>
+                    <%= render partial: "tags/add_tags_button", locals: { channel: channel } if !no_link && @user == current_user %>
                     
                 </div>
             </div>

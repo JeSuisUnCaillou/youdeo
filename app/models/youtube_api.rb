@@ -112,6 +112,7 @@ class YoutubeApi
         
         def get_resource_page(url, page_token)
             full_url = URI.parse "#{url}&maxResults=50&key=#{API_KEY}&pageToken=#{page_token}"
+            ap full_url
             res = Net::HTTP.get(full_url)
             json = ActiveSupport::JSON.decode(res)
             items = json["items"]

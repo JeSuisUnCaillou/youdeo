@@ -1,4 +1,2 @@
 
-<%# @tags.each do |tag_title, channels_count| %>
-    <%#= render partial: "tags/tag_with_channels", locals: { tag} %>
-<%# end %>
+<%= render partial: "tags/tags_with_channels", locals: { tags: @tags, no_link: true } %>

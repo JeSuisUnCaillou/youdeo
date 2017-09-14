@@ -20,6 +20,7 @@ class User < ApplicationRecord
     def tags_and_channels_hashs
         youtube_api = YoutubeApi.new
         subscribed_channels = youtube_api.get_subscribed_channels(self)
+        
         tags_hash = self.tags_with_channels
         
         split_infos(tags_hash, subscribed_channels)
