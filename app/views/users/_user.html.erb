@@ -1,0 +1,24 @@
+<% user ||= OpenStruct.new(id: 0, name: "", image_url: "", tag_count: 0, channel_count: 0) %>
+
+<div class="card">
+    <div class="row pl-3 pr-3">
+        <div class="col-xs-4 pr-1">
+            <%= link_to user_path(user.id) do %>
+                <%= image_tag user.image_url, class: "img-fluid rounded" %>    
+            <% end %>
+        </div>
+        
+        <div class="col-xs-8 pl-1">
+            <div>
+                <%= link_to user_path(user.id) do %>
+                    <strong><%= user.name.truncate(30) %></strong>
+                <% end %>
+            </div>
+            <div>
+                <small><b><%= user.channel_count %></b> channels</small>
+                <small><b><%= user.tag_count %></b> tags</small>
+            </div>
+        </div>
+        
+    </div>
+</div>

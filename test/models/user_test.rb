@@ -114,7 +114,8 @@ class UserTest < ActiveSupport::TestCase
 
   test "get all users with channel count and tag count" do
     #Using fixtures, yeah !
-    assert_equal([[0, "Alice", "myImageUrl", 2, 2]], User.all_with_tags_and_channels_count)
+    result = OpenStruct.new(id: 0, name: "Alice", image_url: "", tag_count: 2, channel_count: 2)
+    assert_equal([result], User.all_with_tags_and_channels_count)
   end
   
   test "split infos between tagged and untagged channels" do

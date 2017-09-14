@@ -73,7 +73,18 @@ class User < ApplicationRecord
     def self.all_with_tags_and_channels_count
         User.all.joins(:user_channel_tag_relationships)
             .group('users.id')
-            .pluck('users.id, users.name, users.google_image_url, COUNT(DISTINCT user_channel_tag_rels.tag_id) as tag_count, COUNT(DISTINCT user_channel_tag_rels.channel_id) as channel_count')
+            .pluck('users.id, users.name, users.google_image_url, COUNT(DISTINCT user_channel_tag_rels.tag_id) as tags_count, COUNT(DISTINCT user_channel_tag_rels.channel_id) as channels_count')
+            .map{ |id, name, url, tag_c, chan_c|
+                OpenStruct.new(id: id, name: name, image_url: url, tag_count: tag_c, channel_count: chan_c)
+            }
+            # .inject({}) { |hash, columns|
+            #     if hash[columns[0]]
+            #         hash[columns[0]] << columns[1..-1]
+            #     else
+            #         hash[columns[0]] = [columns[1..-1]]
+            #     end
+            #     hash
+            # }
     end
 
     #  EXAMPLE OF RESPONSE FROM GOOGLE OMNIAUTH : (there isn't any email, so I worked around it)
