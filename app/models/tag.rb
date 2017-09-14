@@ -11,4 +11,17 @@ class Tag < ApplicationRecord
             .pluck('tags.title, COUNT(user_channel_tag_rels.channel_id) as channels_count')
             .to_h
     end
+    
+    def self.all_with_channels
+        Tag.joins(:channels)
+            .pluck("tags.title, channels.uid")
+            .inject({}) { |hash, columns|
+                if hash[columns[0]]
+                    hash[columns[0]] << columns[1]
+                else
+                    hash[columns[0]] = [columns[1]]
+                end
+                hash
+            }
+    end
 end

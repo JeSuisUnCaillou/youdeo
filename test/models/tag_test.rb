@@ -24,4 +24,8 @@ class TagTest < ActiveSupport::TestCase
     tags_hash = Tag.all_with_channels_count
     assert_equal({"TitleOne"=>1, "TitleTwo"=>2}, tags_hash)
   end
+  
+  test "all tags with channels hash" do
+    assert_equal({"TitleTwo"=>["UidTwo", "UidOne"], "TitleOne"=>["UidOne"]}, Tag.all_with_channels)
+  end
 end

@@ -43,7 +43,6 @@ class User < ApplicationRecord
     # Returns a hash with channel titles as keys, and list of channels as values
     def tags_with_channels
        tags.joins("INNER JOIN channels ON user_channel_tag_rels.channel_id = channels.id")
-            .group('tags.title, channels.uid')
             .pluck('tags.title, channels.uid')
             .inject({}) { |hash, columns|
                 if hash[columns[0]]
@@ -57,7 +56,6 @@ class User < ApplicationRecord
     
     def channels_with_tags
        channels.joins("INNER JOIN tags ON user_channel_tag_rels.tag_id = tags.id")
-            .group('channels.uid, tags.title')
             .pluck('channels.uid, tags.title')
             .inject({}) { |hash, columns|
                 if hash[columns[0]]
@@ -77,14 +75,6 @@ class User < ApplicationRecord
             .map{ |id, name, url, tag_c, chan_c|
                 OpenStruct.new(id: id, name: name, image_url: url, tag_count: tag_c, channel_count: chan_c)
             }
-            # .inject({}) { |hash, columns|
-            #     if hash[columns[0]]
-            #         hash[columns[0]] << columns[1..-1]
-            #     else
-            #         hash[columns[0]] = [columns[1..-1]]
-            #     end
-            #     hash
-            # }
     end
 
     #  EXAMPLE OF RESPONSE FROM GOOGLE OMNIAUTH : (there isn't any email, so I worked around it)
