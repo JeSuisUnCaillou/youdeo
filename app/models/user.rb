@@ -71,7 +71,7 @@ class User < ApplicationRecord
     
     
     def self.all_with_tags_and_channels_count
-        User.all.joins(:user_channel_tag_relationships)
+        User.all.includes(:user_channel_tag_relationships)
             .group('users.id')
             .pluck('users.id, users.name, users.google_image_url, COUNT(DISTINCT user_channel_tag_rels.tag_id) as tags_count, COUNT(DISTINCT user_channel_tag_rels.channel_id) as channels_count')
             .map{ |id, name, url, tag_c, chan_c|

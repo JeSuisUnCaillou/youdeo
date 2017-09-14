@@ -2,9 +2,11 @@
 
 <% if @user.google_refresh_token.present? %>
     
-    <% if user_signed_in? && @user == current_user %>
+     <% if @user == current_user %>
         <p>(this is you) <%= @elapsed_time %>s</p>
-        
+     <% end %>
+    
+    <% if user_signed_in? %>
         
         <%= render partial: "tags/tags_with_channels", locals: { tags: @tags } %>
     

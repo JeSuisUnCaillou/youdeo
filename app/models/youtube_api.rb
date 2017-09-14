@@ -41,7 +41,7 @@ class YoutubeApi
         
         # vvv FASTER vvv
         
-        channels = get_all_subscribed_channels(account)
+        channels = get_all_subscribed_channels(account) || []
         
         channels.map{ |channel| 
             c = OpenStruct.new(
@@ -56,7 +56,7 @@ class YoutubeApi
     end
     
     def get_channels(channel_uids)
-        channels = get_all_channels(channel_uids)
+        channels = get_all_channels(channel_uids) || []
         
         channels.map{ |channel| 
             c = OpenStruct.new(
@@ -71,7 +71,7 @@ class YoutubeApi
     end
     
     def get_playlist_videos(playlist_id)
-        items = get_all_playlist_items(playlist_id)
+        items = get_all_playlist_items(playlist_id) || []
         
         items.select{ |item| item["snippet"]["thumbnails"].present? } #remove the videos without thumbnails, aka private ones
           .map{ |item|

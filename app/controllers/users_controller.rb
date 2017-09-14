@@ -8,7 +8,7 @@ class UsersController < ApplicationController
     def show
         init_time = DateTime.now
         
-        if(current_user == @user && @user.google_refresh_token.present?)
+        if( @user.google_refresh_token.present?)
             @tags, @uncategorized_channels = @user.tags_and_channels_hashs
             
             @my_tags_with_count = @tags.map{ |tag_title, channels|
