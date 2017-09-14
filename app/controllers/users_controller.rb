@@ -2,13 +2,13 @@ class UsersController < ApplicationController
     before_action :set_user, only: [:show]
     
     def index
-        
+        @users = User.all_with_tags_and_channels_count
     end
     
     def show
         init_time = DateTime.now
         
-        if(current_user == @user)
+        if(current_user == @user && @user.google_refresh_token.present?)
             @tags, @uncategorized_channels = @user.tags_and_channels_hashs
             
             @my_tags_with_count = @tags.map{ |tag_title, channels|

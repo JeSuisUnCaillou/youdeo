@@ -68,6 +68,13 @@ class User < ApplicationRecord
                 hash
             }
     end
+    
+    
+    def self.all_with_tags_and_channels_count
+        User.all.joins(:user_channel_tag_relationships)
+            .group('users.id')
+            .pluck('users.id, users.name, users.google_image_url, COUNT(DISTINCT user_channel_tag_rels.tag_id) as tag_count, COUNT(DISTINCT user_channel_tag_rels.channel_id) as channel_count')
+    end
 
     #  EXAMPLE OF RESPONSE FROM GOOGLE OMNIAUTH : (there isn't any email, so I worked around it)
     #  {

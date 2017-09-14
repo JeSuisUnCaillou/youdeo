@@ -1,7 +1,16 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
- one:
-   user_id: 0
-   channel_id: 0
-   tag_id: 0
+one:
+ user_id: 0
+ channel_id: 0
+ tag_id: 0
 
+two:
+ user_id: 0
+ channel_id: 0
+ tag_id: 1
+
+three:
+ user_id: 0
+ channel_id: 1
+ tag_id: 1

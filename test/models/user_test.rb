@@ -112,6 +112,10 @@ class UserTest < ActiveSupport::TestCase
     assert_equal({channel1.uid => [tag1.title, tag2.title], channel2.uid => [tag2.title]}, user.channels_with_tags)
   end
 
+  test "get all users with channel count and tag count" do
+    #Using fixtures, yeah !
+    assert_equal([[0, "Alice", "myImageUrl", 2, 2]], User.all_with_tags_and_channels_count)
+  end
   
   test "split infos between tagged and untagged channels" do
     tags_hash = { title1: ["uid1"], title2: ["uid2", "uid3"] }
