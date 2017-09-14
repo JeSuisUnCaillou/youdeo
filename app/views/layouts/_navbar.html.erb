@@ -7,6 +7,13 @@
     </button>
   
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <%= link_to users_path(), 'data-toggle': "tooltip", 'data-placement': "bottom", title: "See all users" do %>
+              Users
+            <% end %>
+          </li>
+      </ul>
       <ul class="navbar-nav ml-auto">
         <% if user_signed_in? %>
           <li class="nav-item">
@@ -17,6 +24,7 @@
               <%= image_tag current_user.google_image_url, class: "img-fluid rounded", width: "30px" if current_user.google_image_url %>
             <% end %>
           </li>
+          
         <% else %>
           <li class="nav-item">
             <%= link_to "Log in", new_user_session_path, class: "nav-link" %>
