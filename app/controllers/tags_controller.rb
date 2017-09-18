@@ -26,6 +26,10 @@ class TagsController < ApplicationController
         end
     end
     
+    def index
+        
+    end
+    
     def show
         channel_uids = @tag.channels.pluck(:uid)
         youtube_api = YoutubeApi.new
